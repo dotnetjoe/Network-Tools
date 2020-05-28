@@ -6,17 +6,21 @@ Network tools based on scapy.
 
 ## Example Operations
 
-### Arp Spoofing
+<!-- ### ARP Spoofing
+
 Perform arp spoofing attack on the given target.
+
 ```python
 >>> import networks
 >>> target = "192.168.1.40"
 >>> gateway = "192.168.1.1"
 >>> networks.arp_spoofing(target, gateway, interval=1, timeout=120)
-```
+``` -->
 
-### Hosts in segment
+### Segment Hosts
+
 Find hosts inside of a given segment.
+
 ```python
 >>> import networks
 >>> hosts = networks.get_hosts_in_segment("192.168.1.0")
@@ -25,7 +29,9 @@ Find hosts inside of a given segment.
 ```
 
 ### Ping
+
 Send ICMP packets to the given host.
+
 ```python
 >>> import networks
 >>> host_up = networks.ping("www.google.com", count=5, ttl=30, timeout=5)
@@ -34,7 +40,9 @@ True
 ```
 
 ### Port Scanning
+
 Perform port scanning on the given target.
+
 ```python
 >>> import networks
 >>> ports = networks.port_scanning("192.168.1.40", min_port=78, max_port=81, timeout=30)
@@ -43,7 +51,9 @@ Perform port scanning on the given target.
 ```
 
 ### Traceroute
+
 Perform trace to the given host.
+
 ```python
 >>> import networks
 >>> stations = networks.trace("www.google.com", max_hops=20, timeout=5)
@@ -51,7 +61,7 @@ Perform trace to the given host.
 ['192.168.1.1', '0.0.0.0', None, '172.18.9.214', '172.17.3.118', None, None, '209.85.241.75', '172.217.18.100']
 ```
 
-<br>
+<br><br>
 
 This repo also contains a work-in-progress reimplementation of scapy ([scanner.py](tools/scanner.py)). [nmap.py](tools/nmap.py) and [nmap_auto.py](tools/nmap_auto.py) delve into the usability of this reimplmentations.
 
