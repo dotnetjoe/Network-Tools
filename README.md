@@ -61,8 +61,10 @@ Perform trace to the given host.
 ['192.168.1.1', '0.0.0.0', None, '172.18.9.214', '172.17.3.118', None, None, '209.85.241.75', '172.217.18.100']
 ```
 
-<br><br>
+---
 
 This repo also contains a work-in-progress reimplementation of scapy ([scanner.py](tools/scanner.py)). [nmap.py](tools/nmap.py) and [nmap_auto.py](tools/nmap_auto.py) delve into the usability of this reimplmentations.
+
+---
 
 Includes contributions from Ben Gabay.
