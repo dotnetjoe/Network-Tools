@@ -1,5 +1,4 @@
 from scapy.all import *
-
 from networks.utils import wait_for_threads, host_is_up
 
 
