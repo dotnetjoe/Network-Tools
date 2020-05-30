@@ -1,8 +1,7 @@
+from threading import Thread
+from networks.utils import wait_for_threads
 import collections
 import socket
-from threading import Thread
-
-from networks.utils import wait_for_threads
 
 PACKET_TIMEOUT = 2
 
