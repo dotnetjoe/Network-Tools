@@ -27,5 +27,6 @@ def get_hosts_in_segment(segment, timeout=7, retry=3):
         t1 = Thread(target=find_host, args=(current_host, timeout, retry, hosts))
         t1.start()
         threads_list.append(t1)
+        
     wait_for_threads(threads_list)
     return hosts
