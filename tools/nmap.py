@@ -10,7 +10,6 @@ if len(sys.argv) < 3:
 for port in range(1, 65536):
     if sys.argv[1] == "UDP":
         packet = IP(dst=os.sys.argv[2])/UDP(dport=port)
-
     elif sys.argv[1] == "TCP":
         if len(sys.argv) < 4:
             print("Usage: nmap.py TCP flags host")
@@ -20,6 +19,7 @@ for port in range(1, 65536):
         raise ValueError("Invalid scan type provided!")
 
     ans, unans = sr(packet, verbose=False, timeout=0.1)
+
     if ans:
         print("Port "+str(port)+": open")
     else:
