@@ -1,8 +1,8 @@
 # Network Tools
 
-[![License](https://img.shields.io/github/license/adamalston/network-tools?color=blue)](LICENSE)
+[![License](https://img.shields.io/github/license/adamalston/network-tools?color=black)](LICENSE)
 
-Network tools based on scapy.
+Network tools based around scapy.
 
 ## Example Operations
 
