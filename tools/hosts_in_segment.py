@@ -8,7 +8,7 @@ def find_host(host, timeout, retry, hosts):
 
 
 def get_hosts_in_segment(segment, timeout=7, retry=3):
-    """ 
+    """
         Get all hosts inside a given segment.
         :param segment: segment to search on. e.g: 192.168.1.0
         :param timeout: (optional) timeout in seconds for host to reply. default=10
@@ -24,9 +24,9 @@ def get_hosts_in_segment(segment, timeout=7, retry=3):
 
     for i in range(1, 256):
         current_host = host + "." + str(i)
-        t1 = Thread(target=find_host, args=(current_host, timeout, retry, hosts))
+        t1 = Thread(target = find_host, args = (current_host, timeout, retry, hosts))
         t1.start()
         threads_list.append(t1)
-        
+
     wait_for_threads(threads_list)
     return hosts
