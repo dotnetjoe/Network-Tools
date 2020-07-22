@@ -3,7 +3,7 @@ import time
 
 
 def ping(host, count=5, ttl=64, timeout=5, verbose=True):
-    """ 
+    """
         Send ICMP packets to the given host.
         :param host: host to send the packets to.
         :param count: (optional) amount of packets to send. default=5
