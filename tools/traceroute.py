@@ -6,16 +6,16 @@ TTL_EXCEED = 11
 PACKET_VERBOSE = 0
 
 
-def get_ip_from_packet(packet): 
-	return packet[IP].src
+def get_ip_from_packet(packet):
+    return packet[IP].src
 
 
-def reach_host(response_packet): 
-	return response_packet[ICMP].type != TTL_EXCEED
+def reach_host(response_packet):
+    return response_packet[ICMP].type != TTL_EXCEED
 
 
-def seconds_to_ms(seconds): 
-	return seconds / 60 * 1000
+def seconds_to_ms(seconds):
+    return seconds / 60 * 1000
 
 
 def hop(address, ttl, timeout):
@@ -29,7 +29,7 @@ def print_status_message(success, ttl, response_time=None, ip=None):
         message = f"{ttl})  {response_ms_time} ms {ip}"
     else:
         message = f"{ttl}) Request Time Out."
-		
+
     print(message)
 
 
