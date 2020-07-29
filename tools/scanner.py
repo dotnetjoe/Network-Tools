@@ -238,6 +238,7 @@ class IPPacket:
     def set_tos(self, tos):
         default_tos = IPConstants.DEFAULT_TOS
         default_tos.update(tos)
+
         for key, item in default_tos:
             if key == IPConstants.TOS_PRECEDENCE:
                 if item < 0 or item > 7:
@@ -260,6 +261,7 @@ class IPPacket:
     def set_identification(self, identification=-1):
         if identification == -1:
             identification = randint(0, 65535)
+
         self.check_int(identification, 16)
         self.identification = identification
         return identification
@@ -267,6 +269,7 @@ class IPPacket:
     def set_flags(self, flags):
         default_flags = IPConstants.DEFAULT_FLAGS
         default_flags.update(flags)
+
         for key, item in default_flags:
             if key == IPConstants.FLAGS_RESERVED:
                 if item != IPConstants.FLAGS_RESERVED:
@@ -301,6 +304,7 @@ class IPPacket:
     def set_source_address(self, source_address):
         if isinstance(source_address, basestring):
             source_address = self.ip2long(source_address)
+
         self.check_int(source_address, 32)
         self.source_address = source_address
         return self.source_address
@@ -322,6 +326,7 @@ class IPPacket:
 
     def get_ihl(self):
         length = self.get_bit_length()
+
         if length % 32:
             raise ValueError('IHL is not divisible by 32!')
         length /= 32
@@ -337,6 +342,7 @@ class IPPacket:
 
     def get_total_length(self):
         total_length = self.get_bit_length() + len(data)*8
+
         if total_length % 8:
             raise ValueError('Length is not divisible by 8!')
 
@@ -386,9 +392,8 @@ class IPPacket:
 
     # Internal getters
     def ip2long(self, ip):
-        """
-        Convert an IP string to long
-        """
+        """Convert an IP string to long"""
+
         packedIP = socket.inet_aton(ip)
         return struct.unpack("!L", packedIP)[0]
 
@@ -422,8 +427,7 @@ class IPPacket:
         return (self.get_byte_flags() << 13) | self.get_fragment_offset()
 
     def create_socket(self):
-        self.socket = socket.socket(
-            socket.AF_INET, socket.SOCK_RAW, self.get_protocol())
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_RAW, self.get_protocol())
         self.socket.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
 
 
@@ -479,8 +483,7 @@ daddr = socket.inet_aton(dest_ip)
 ihl_version = (version << 4) + ihl
 
 # the ! in the pack format string means network order
-ip_header = pack('!BBHHHBBH4s4s', ihl_version, tos, tot_len,
-                 id, frag_off, ttl, protocol, check, saddr, daddr)
+ip_header = pack('!BBHHHBBH4s4s', ihl_version, tos, tot_len, id, frag_off, ttl, protocol, check, saddr, daddr)
 
 # tcp header fields
 source = 1234   # source port
@@ -500,12 +503,10 @@ check = 0
 urg_ptr = 0
 
 offset_res = (doff << 4) + 0
-tcp_flags = fin + (syn << 1) + (rst << 2) + \
-    (psh << 3) + (ack << 4) + (urg << 5)
+tcp_flags = fin + (syn << 1) + (rst << 2) + \  (psh << 3) + (ack << 4) + (urg << 5)
 
 # the ! in the pack format string means network order
-tcp_header = pack('!HHLLBBHHH', source, dest, seq, ack_seq,
-                  offset_res, tcp_flags,  window, check, urg_ptr)
+tcp_header = pack('!HHLLBBHHH', source, dest, seq, ack_seq, offset_res, tcp_flags,  window, check, urg_ptr)
 
 # pseudo header fields
 source_address = socket.inet_aton(source_ip)
@@ -521,8 +522,7 @@ psh = psh + tcp_header
 tcp_checksum = checksum(psh)
 
 # make the tcp header again and fill the correct checksum
-tcp_header = pack('!HHLLBBHHH', source, dest, seq, ack_seq,
-                  offset_res, tcp_flags,  window, tcp_checksum, urg_ptr)
+tcp_header = pack('!HHLLBBHHH', source, dest, seq, ack_seq, offset_res, tcp_flags,  window, tcp_checksum, urg_ptr)
 
 # final full packet - syn packets dont have any data
 packet = ip_header + tcp_header
